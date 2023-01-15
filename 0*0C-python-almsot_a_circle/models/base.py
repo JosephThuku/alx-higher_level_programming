@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 class Base:
 
     _nb_objects = 0
@@ -7,6 +8,6 @@ class Base:
         if id is not None:
             self.id = id
         else:
-            _nb_objects+=1
+            Base._nb_objects+=1
 
-            id = Base._nb_objects
+            self.id= Base._nb_objects
