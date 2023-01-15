@@ -1,10 +1,15 @@
 #!/usr/bin/python3
+'''the base class server as the base of all'''
+
+
 class Base:
 
     _nb_objects = 0
 
 
     def __init__(self, id=None):
+        ''''increments the value of id'''
+        
         if id is not None:
             self.id = id
         else:
