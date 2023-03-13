@@ -1,4 +1,5 @@
 #!/usr/bin/node
+let language;
 const language1 = 'C is fun';
 const language2 = 'Python is cool';
 const language3 = 'JavaScript is amazing';
