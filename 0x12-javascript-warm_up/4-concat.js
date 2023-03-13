@@ -1,7 +1,2 @@
 #!/usr/bin/node
-const args = process.argv.slice(2);
-if (args[0] && args[1]) {
-  console.log(`${args[0]} is ${args[1]}`);
-} else {
-  console.log('Usage: node script.js <arg1> <arg2>');
-}
+console.log(process.argv[2] + ' is ' + process.argv[3]);
