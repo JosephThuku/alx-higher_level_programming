@@ -1,2 +1,3 @@
--- select data in califonia
-SELECT * FROM cities WHERE state.id = (SELECT id FROM states WHERE name = 'California') ORDER BY id;
+-- nested select statements
+SELECT id, name FROM cities WHERE state_id = (SELECT id FROM states WHERE name = 'California')
+    ORDER BY id;
