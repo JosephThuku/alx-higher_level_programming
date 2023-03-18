@@ -1,29 +1,31 @@
 #!/usr/bin/python3
 """
-Python script that lists all states from database hbtn_0e_usa
+Same as task2 but is safe from MySQL injections
 """
+
 import MySQLdb
-import sys
+from sys import argv
+
 
 def main():
-    input = sys.argv[4]
-    db = MySQLdb.connect(
-        host="localhost",
-        user=sys.argv[1],
-        passwd=sys.argv[2],
-        db=sys.argv[3],
-        port=3306)
-    cur = db.cursor()
-    cur.execute("""
-    SELECT *FROM states
-    WHERE name=%s
-    ORDER BY states.id""", (input,))
-    rows = cur.fetchall()
-    for row in rows:
-        print(row)
-    cur.close()
-    db.close()
+    conn = MySQLdb.connect(host="localhost",
+                           port=3306,
+                           user=argv[1],
+                           passwd=argv[2],
+                           db=argv[3],
+                           charset="utf8")
+    cursor = conn.cursor()
+    # HERE I have to know SQL to grab all states in my database
+    cursor.execute("""SELECT * FROM states
+    WHERE name = %(name)s
+    ORDER BY id ASC""", {'name': argv[4]})
+    query_rows = cursor.fetchall()
+    for row in query_rows:
+        if row[1] == argv[4]:
+            print(row)
+    cursor.close()
+    conn.close()
 
 
-if __name__ == "__main___":
+if __name__ == "__main__":
     main()
