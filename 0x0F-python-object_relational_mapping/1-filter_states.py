@@ -23,9 +23,8 @@ def main():
     rows = cur.fetchall()
     for row in rows:
         print(row)
-
-        cur.close()
-        conn.close()
+    cur.close()
+    conn.close()
 
 
 if __name__ == "__main__":
