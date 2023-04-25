@@ -1,20 +1,26 @@
 #!/usr/bin/node
+
 const request = require('request');
 
-const API_URL = 'https://swapi-api.alx-tools.com/api/films/';
-const WEDGE_ANTILLES_ID = 18;
+const url = process.argv[2];
+const characterId = 18;
 
-request(API_URL, function (error, response, body) {
-  if (!error && response.statusCode === 200) {
-    const films = JSON.parse(body).results;
-    let wedgeCount = 0;
-    films.forEach(film => {
-      if (film.characters.includes(`https://swapi-api.alx-tools.com/api/people/${WEDGE_ANTILLES_ID}/`)) {
-        wedgeCount++;
+request(url, function (error, response, body) {
+  if (error) {
+    console.log(error);
+  } else if (response.statusCode === 200) {
+    const results = JSON.parse(body).results;
+    let count = 0;
+    for (const i in results) {
+      const characters = results[i].characters;
+      for (const chars in characters) {
+        if (characters[chars].includes(characterId)) {
+          count++;
+        }
       }
-    });
-    console.log(wedgeCount);
+    }
+    console.log(count);
   } else {
-    console.log('Error retrieving data from API.');
+    console.log('Error code:' + response.statusCode);
   }
 });
